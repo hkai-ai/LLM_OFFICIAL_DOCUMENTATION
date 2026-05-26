@@ -1,9 +1,11 @@
 ---
 source: https://developers.openai.com/api/reference/overview
-fetched_at: 2026-05-19
+fetched_at: 2026-05-26
 api_version: N/A
 last_updated: 2026-05-26
 ---
+
+> 2026-05-26 更新：补齐 moderations / fine-tuning / vector-stores / realtime / containers / conversations / evals / uploads / webhooks / skills / videos / chatkit / admin / legacy 共 14 篇端点文档。
 
 # OpenAI API · 厂商概览
 
@@ -59,7 +61,7 @@ last_updated: 2026-05-26
 | Count tokens | POST | `/v1/responses/{response_id}/tokens` | 估算 token。 |
 | Compact a response | POST | `/v1/responses/{response_id}/compact` | 压缩长上下文。 |
 
-附属资源：Conversations（`/v1/conversations`）、Items、Streaming events。
+附属资源：Conversations（`/v1/conversations`）见 [conversations.md](./conversations.md)；Streaming events 与 Responses 文档合并。
 
 ### Chat Completions（仍支持）
 
@@ -108,51 +110,65 @@ last_updated: 2026-05-26
 
 ### Moderations
 
-POST `/v1/moderations`，检查内容是否违反 usage policy。常用模型 `omni-moderation-latest`。
+POST `/v1/moderations`：检查内容是否违反 usage policy。详见 [moderations.md](./moderations.md)。
 
 ### Fine-tuning
 
-`/v1/fine_tuning/jobs`（CRUD + list/cancel/events）；checkpoints、permissions、graders 为子资源。
+`/v1/fine_tuning/jobs`（CRUD + list/cancel/pause/resume/events）；checkpoints、checkpoint permissions、alpha graders 为子资源。详见 [fine-tuning.md](./fine-tuning.md)。
 
 ### Vector Stores
 
-`/v1/vector_stores`（CRUD/search），子资源 files、file_batches。Responses 与 Assistants 的 `file_search` 工具依赖。
+`/v1/vector_stores`（CRUD/search），子资源 files、file_batches。Responses 与 Assistants 的 `file_search` 工具依赖。详见 [vector-stores.md](./vector-stores.md)。
 
 ### Realtime
 
-`/v1/realtime/*`：sessions、translations、client_secrets、calls（accept/hangup/refer/reject）、client/server events。基于 WebSocket / WebRTC。
+`/v1/realtime/*`：client_secrets、calls（accept/hangup/refer/reject）+ WebSocket 协议。详见 [realtime.md](./realtime.md)。
 
 ### Webhooks
 
-`/v1/webhooks/*` + `events`。用于异步事件回调（fine-tune 完成、batch 完成等）。
+server 端 webhook 接收 batch / fine-tuning / eval / background response / realtime call 等异步事件。详见 [webhooks.md](./webhooks.md)。
 
 ### Containers
 
-`/v1/containers`（CRUD），子资源 files。Code Interpreter 的运行容器。
+`/v1/containers`（CRUD），子资源 files。Code Interpreter 的运行容器。详见 [containers.md](./containers.md)。
+
+### Conversations
+
+`/v1/conversations`：Responses 的服务端会话存储；items 子资源。详见 [conversations.md](./conversations.md)。
 
 ### Uploads
 
-`/v1/uploads`：大文件分片上传协议，配合 Files 使用。
+`/v1/uploads`：大文件分片上传协议（≤8 GB），配合 Files 使用。详见 [uploads.md](./uploads.md)。
 
 ### Evals
 
-`/v1/evals`：评估任务 CRUD、runs、output items。
+`/v1/evals`：评估任务 CRUD、runs、output items。详见 [evals.md](./evals.md)。
 
-### ChatKit
+### Skills
 
-`/v1/chatkit/*`：sessions、threads（前端 SDK 配套）。
+`/v1/skills`：可上传 SKILL 包，模型在 Responses + code_interpreter 容器内按需加载。详见 [skills.md](./skills.md)。
+
+### Videos
+
+`/v1/videos`：Sora 2 视频生成（generations / extends / edits / remix / characters）。详见 [videos.md](./videos.md)。
+
+### ChatKit（Beta）
+
+`/v1/beta/chatkit/*`：sessions、threads（前端 SDK 配套）。详见 [chatkit.md](./chatkit.md)。
 
 ### Administration（admin API key 限定）
 
-`/v1/organization/*`：audit_logs、admin API keys、usage 指标、invites、users、roles、groups、certificates、projects（含 nested users / service_accounts / api_keys / rate_limits / permissions / groups / roles）。
+`/v1/organization/*`：audit_logs、admin API keys、usage 指标、invites、users、roles、groups、data retention、spend alerts、certificates、projects（含 nested users / service_accounts / api_keys / rate_limits / permissions / groups / roles）。详见 [admin.md](./admin.md)。
 
 ### Legacy
 
 | 端点 | PATH | 说明 |
 | --- | --- | --- |
 | Completions（legacy） | POST `/v1/completions` | 仅 `gpt-3.5-turbo-instruct` 等少量模型 |
-| Assistants v2 | `/v1/assistants`、`/v1/threads`、`/v1/threads/{id}/runs`、`/v1/threads/{id}/messages` | 官方建议迁移到 Responses + Conversations |
+| Assistants v2 | `/v1/beta/assistants`、`/v1/beta/threads`、`/v1/beta/threads/{id}/runs`、`/v1/beta/threads/{id}/messages` | 官方建议迁移到 Responses + Conversations |
 | Realtime Beta | `/v1/realtime/sessions`、`/v1/realtime/transcription_sessions` | 旧版 Realtime |
+
+全部 legacy 子集详见 [legacy.md](./legacy.md)。
 
 ## Chat Completions vs Responses API
 

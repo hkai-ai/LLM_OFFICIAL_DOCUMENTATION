@@ -83,6 +83,8 @@ LLM_OFFICIAL_DOCUMENTATION/
 | --- | --- | --- |
 | OpenAI | `POST /v1/embeddings` | [embeddings.md](./openai/embeddings.md) |
 | Google Gemini | `POST /v1beta/{model}:embedContent` | [embed-content.md](./google-gemini/embed-content.md) |
+| 阿里百炼 | `POST /compatible-mode/v1/embeddings` + DashScope `/api/v1/services/embeddings/text-embedding/text-embedding` | [embeddings.md](./alibaba-bailian/embeddings.md) |
+| 智谱 | `POST /paas/v4/embeddings` | [embeddings.md](./zhipu/embeddings.md) |
 | Anthropic | 无（推荐第三方） | — |
 | DeepSeek | 无 | — |
 
@@ -90,10 +92,11 @@ LLM_OFFICIAL_DOCUMENTATION/
 
 | 厂商 | 文件 | 缓存 | 批处理 |
 | --- | --- | --- | --- |
-| Anthropic | （Files Beta，本仓库未收录） | `cache_control` 内联，无独立端点 | （Message Batches Beta，本仓库未收录） |
+| Anthropic | `/v1/files`（Beta） · [files.md](./anthropic/files.md) | `cache_control` 内联，无独立端点 | `/v1/messages/batches` GA · [messages-batches.md](./anthropic/messages-batches.md) |
 | OpenAI | `/v1/files` | `prompt_cache_key` 内联 | `/v1/batches`，详见 [files-and-batches.md](./openai/files-and-batches.md) |
-| Google Gemini | `/v1beta/files` | `/v1beta/cachedContents`（[caching.md](./google-gemini/caching.md)） | （Batches Beta，本仓库未收录） |
+| Google Gemini | `/v1beta/files` | `/v1beta/cachedContents`（[caching.md](./google-gemini/caching.md)） | `batchGenerateContent` · [batches.md](./google-gemini/batches.md) |
 | DeepSeek | 无 | 自动硬盘缓存，详见 [caching.md](./deepseek/caching.md) | 无 |
+| 阿里百炼 | OpenAI 兼容 `/v1/files` + OSS 路径 | 显式 `cache_control` 内联 | `/compatible-mode/v1/batches` · [batch.md](./alibaba-bailian/batch.md) |
 
 ### 音频 / 图像
 
@@ -161,16 +164,16 @@ LLM_OFFICIAL_DOCUMENTATION/
 
 | 厂商 | 文档完成度 | 抓取日期 |
 | --- | --- | --- |
-| Anthropic | 核心端点 + 流式 + count tokens + models + errors + versioning + pricing | 2026-05-26 |
-| OpenAI | Chat / Responses / Embeddings / Audio / Images / Files & Batches / Models / Errors / pricing | 2026-05-26 |
-| Google Gemini | generateContent / streamGenerate / countTokens / embedContent / files / caching / models / errors / pricing | 2026-05-26 |
-| DeepSeek | Chat / FIM / models / balance / caching / errors / rate-limits / pricing | 2026-05-26 |
+| Anthropic | Messages 系列 + count tokens + Message Batches + Files + Skills + Managed Agents + Rate Limits + Service Tiers + models + errors + versioning + pricing | 2026-05-26 |
+| OpenAI | Responses / Chat / Embeddings / Audio / Images / Videos / Files & Batches / Uploads / Moderations / Fine-tuning / Vector Stores / Containers / Conversations / Evals / Skills / Realtime / Webhooks / ChatKit / Admin / Legacy / Models / Errors / pricing | 2026-05-26 |
+| Google Gemini | generateContent / streamGenerate / countTokens / embedContent / files / caching / batches / live-api / file-search / tuning / models / errors / pricing | 2026-05-26 |
+| DeepSeek | Chat / FIM / Anthropic 兼容 / guides（思考 / 多轮 / JSON / 工具 / 前缀续写 / token 用量）/ models / balance / caching / errors / rate-limits / pricing | 2026-05-26 |
 | Moonshot Kimi | Chat / partial-mode / estimate-tokens / models / user-balance / errors / rate-limits / pricing / batch / files / tool-use / json-mode / vision / web-search / thinking / guides | 2026-05-26 |
-| 阿里百炼 | Chat（OpenAI 兼容）/ Responses / DashScope generation / models / errors | 2026-05-20 |
-| MiniMax | chat（OpenAI / Anthropic 双兼容）/ messages / models / speech / voice / video / image / music / files / errors / pricing | 2026-05-26 |
-| 智谱 BigModel | chat（同步/异步/思考/工具/视觉/音频）/ embeddings / images / videos / audio / tools / batch / files / models / errors / pricing | 2026-05-26 |
+| 阿里百炼 | Chat（OpenAI 兼容）/ Responses / DashScope generation / embeddings（双协议）/ batch / models / errors | 2026-05-26 |
+| MiniMax | chat（OpenAI / Anthropic 双兼容）/ messages / models / speech / voice / video / image / music / lyrics / caching / files / errors / pricing | 2026-05-26 |
+| 智谱 BigModel | chat（同步/异步/思考/工具/视觉/音频）/ embeddings / images / videos / audio / tools / misc（rerank/tokenizer/OCR）/ agents / knowledge-base / realtime / batch / files / models / errors / pricing | 2026-05-26 |
 | OpenRouter | Chat / Completions / generation / models / credits / api-keys / auth / provider-routing / model-routing / transforms / errors / rate-limits | 2026-05-19 |
 
-> 表中"完成度"列在 2026-05-26 同步定价文档时，给 Anthropic / OpenAI / Google Gemini / DeepSeek / Moonshot 五家追加了 `pricing` 一项；详见各 `<vendor>/pricing.md`。
+> 2026-05-26 第三轮补齐：OpenAI 新增 14 篇（moderations / fine-tuning / vector-stores / realtime / containers / conversations / evals / uploads / webhooks / skills / videos / chatkit / admin / legacy）；DeepSeek 新增 anthropic-api / guides；智谱新增 agents / knowledge-base / realtime / misc；MiniMax 新增 caching / lyrics。
 
 待补：xAI Grok、字节豆包、Mistral 等。

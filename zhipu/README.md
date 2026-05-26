@@ -5,6 +5,8 @@ api_version: paas/v4
 last_updated: 2026-05-26
 ---
 
+> 2026-05-26 更新：补齐 Agent API（agents.md）、知识库 API（knowledge-base.md）、实时 API（realtime.md）、模型 API 杂项（misc.md，rerank / tokenizer / 文档解析）。
+
 # 智谱 BigModel（GLM）API 概览
 
 智谱 BigModel 平台（GLM 系列）覆盖语言、视觉、图像、视频、音频、嵌入、批处理、文件、知识库、智能体、工具等能力。除自家 RESTful API（`/paas/v4`）外，还提供 **OpenAI 兼容** 与 **Anthropic / Claude 兼容** 两套 SDK 接入路径。
@@ -41,7 +43,11 @@ last_updated: 2026-05-26
 - `tools.md` — 工具 API（Web Search / 文件解析 / OCR / 内容安全 / 网页阅读）
 - `batch.md` — 批处理任务
 - `files.md` — 文件管理
-- `models.md` — 模型清单 + Tokenizer + Rerank
+- `models.md` — 模型清单
+- `misc.md` — 文本重排序 / 文本分词器 / 文档解析（同步）
+- `agents.md` — Agent API（智能体对话 / 异步结果 / 对话历史）
+- `knowledge-base.md` — 知识库 API（CRUD + 检索 + 文档管理 + 问答 Agent）
+- `realtime.md` — GLM-Realtime WSS 音视频通话
 - `errors.md` — 错误码
 - `pricing.md` — 计费要点（详细单价见官方）
 
@@ -60,8 +66,9 @@ last_updated: 2026-05-26
 | `POST /paas/v4/audio/transcriptions` | 语音转文本（GLM-ASR） | [audio.md §ASR](./audio.md) |
 | `POST /paas/v4/audio/speech` | 文本转语音（GLM-TTS） | [audio.md §TTS](./audio.md) |
 | `POST /paas/v4/voice/clone` | 音色复刻 | [audio.md §音色复刻](./audio.md) |
-| `POST /paas/v4/rerank` | 文本重排序（Rerank） | [models.md](./models.md) |
-| `POST /paas/v4/tokenizer` | 文本分词器 | [models.md](./models.md) |
+| `POST /paas/v4/rerank` | 文本重排序（Rerank） | [misc.md](./misc.md) |
+| `POST /paas/v4/tokenizer` | 文本分词器 | [misc.md](./misc.md) |
+| `POST /paas/v4/layout_parsing` | 文档解析（同步 OCR） | [misc.md](./misc.md) |
 
 ### 工具 API
 
@@ -87,13 +94,14 @@ last_updated: 2026-05-26
 | `GET /paas/v4/files/{id}/content` | 文件内容（Batch 输出） | [files.md](./files.md) |
 | `DELETE /paas/v4/files/{id}` | 删除文件 | [files.md](./files.md) |
 
-### Agent / 知识库 / 助理 API
+### Agent / 知识库 / 实时 API
 
-本仓库当前未单独整理；详见官方：
-
-- Agent API：https://docs.bigmodel.cn/api-reference/agent-api/智能体对话
-- 知识库 API：https://docs.bigmodel.cn/api-reference/知识库-api/创建知识库
-- 助理 API：https://docs.bigmodel.cn/api-reference/助理-api/助手对话
+| 类别 | 文档 | 说明 |
+| --- | --- | --- |
+| Agent API | [agents.md](./agents.md) | `POST /api/v1/agents` 智能体对话 / 异步结果 / 对话历史 |
+| 知识库 API | [knowledge-base.md](./knowledge-base.md) | `/llm-application/open/knowledge`、`/zrag/retrieval` 等 |
+| 实时 API（WSS） | [realtime.md](./realtime.md) | `wss://open.bigmodel.cn/api/paas/v4/realtime` GLM-Realtime |
+| 助理 API（已弃用） | — | 见官方 https://docs.bigmodel.cn/api-reference/助理-api/助手对话 |
 
 ## 模型清单速查
 

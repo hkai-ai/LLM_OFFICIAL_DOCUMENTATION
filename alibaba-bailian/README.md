@@ -1,9 +1,11 @@
 ---
 source: https://help.aliyun.com/zh/model-studio/model-api-reference/
-fetched_at: 2026-05-20
+fetched_at: 2026-05-26
 api_version: N/A（DashScope 路径含 `/api/v1`；OpenAI 兼容模式仅用 `/compatible-mode/v1` 前缀）
-last_updated: 2026-05-20
+last_updated: 2026-05-26
 ---
+
+> 2026-05-26 更新：补齐 OpenAI 兼容 + DashScope 双协议 embeddings.md、Batch 异步批量 batch.md。
 
 # 阿里百炼 Model Studio API 概览
 

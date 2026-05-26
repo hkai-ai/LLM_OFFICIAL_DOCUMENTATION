@@ -1,9 +1,11 @@
 ---
 source: https://ai.google.dev/api?hl=zh-CN
-fetched_at: 2026-05-19
+fetched_at: 2026-05-26
 api_version: v1beta (兼有 v1)
 last_updated: 2026-05-26
 ---
+
+> 2026-05-26 更新：补齐 Batch Mode、Live API、File Search、Tuning 四篇端点文档。
 
 # Google Gemini Developer API · 厂商概览
 
@@ -91,15 +93,45 @@ REST 接口统一使用 **camelCase**（例如 `generationConfig`、`maxOutputTo
 | `cachedContents.patch` | PATCH | `/v1beta/{cachedContent.name=cachedContents/*}` | [caching.md](./caching.md) |
 | `cachedContents.delete` | DELETE | `/v1beta/{name=cachedContents/*}` | [caching.md](./caching.md) |
 
-### 其他分类（暂未在本目录展开）
+### Batch Mode
+
+| 端点 | 方法 | 路径 | 文档 |
+| --- | --- | --- | --- |
+| `models.batchGenerateContent` | POST | `/v1beta/{batch.model=models/*}:batchGenerateContent` | [batches.md](./batches.md) |
+| `batches.get` | GET | `/v1beta/{name=batches/*}` | [batches.md](./batches.md) |
+| `batches.list` | GET | `/v1beta/batches` | [batches.md](./batches.md) |
+| `batches.cancel` | POST | `/v1beta/{name=batches/*}:cancel` | [batches.md](./batches.md) |
+| `batches.delete` | DELETE | `/v1beta/{name=batches/*}` | [batches.md](./batches.md) |
+
+### Live API（WebSocket）
+
+| 端点 | 协议 | 文档 |
+| --- | --- | --- |
+| `BidiGenerateContent` | `wss://generativelanguage.googleapis.com/ws/...v1beta...BidiGenerateContent` | [live-api.md](./live-api.md) |
+
+### File Search
+
+| 端点 | 方法 | 路径 | 文档 |
+| --- | --- | --- | --- |
+| `fileSearchStores.create` | POST | `/v1beta/fileSearchStores` | [file-search.md](./file-search.md) |
+| `fileSearchStores.list` / `.get` / `.delete` | GET / GET / DELETE | `/v1beta/fileSearchStores[/*]` | [file-search.md](./file-search.md) |
+| `fileSearchStores.importFile` | POST | `/v1beta/{fileSearchStoreName=fileSearchStores/*}:importFile` | [file-search.md](./file-search.md) |
+| `fileSearchStores.uploadToFileSearchStore` | POST | `/upload/v1beta/{fileSearchStoreName=fileSearchStores/*}:uploadToFileSearchStore` | [file-search.md](./file-search.md) |
+
+### Tuning
+
+| 端点 | 方法 | 路径 | 文档 |
+| --- | --- | --- | --- |
+| `tunedModels.create` | POST | `/v1beta/tunedModels` | [tuning.md](./tuning.md) |
+| `tunedModels.get` / `.list` / `.patch` / `.delete` | GET / GET / PATCH / DELETE | `/v1beta/tunedModels[/*]` | [tuning.md](./tuning.md) |
+| `tunedModels.transferOwnership` | POST | `/v1beta/{name=tunedModels/*}:transferOwnership` | [tuning.md](./tuning.md) |
+| `tunedModels.generateContent` / `.streamGenerateContent` / `.countTokens` | POST | `/v1beta/{model=tunedModels/*}:...` | [tuning.md](./tuning.md) |
+
+### 实验性
 
 | 分类 | 入口 | 备注 |
 | --- | --- | --- |
-| Batches | `/v1beta/{model=models/*}:batchGenerateContent` 等 | 异步批量推理。 |
-| Live API | `BidiGenerateContent`（WebSocket） | 双向流式、低延迟语音/视频。 |
-| Tuning | `tunedModels.*` | 监督微调。 |
-| File Search | `fileSearchStores.*` / `documents.*` | 内置向量检索。 |
-| Live Music / Interactions | `/api/live_music` / `/api/interactions-api` | 实验性。 |
+| Live Music / Interactions | `/api/live_music` / `/api/interactions-api` | 实验性，未在本目录展开。 |
 
 ### Errors
 

@@ -5,6 +5,8 @@ api_version: N/A
 last_updated: 2026-05-26
 ---
 
+> 2026-05-26 更新：补齐 Prompt 缓存（caching.md，含 OpenAI 兼容被动缓存 + Anthropic 主动缓存）、歌词生成 + 翻唱前处理（lyrics.md）。
+
 # MiniMax 平台 API 概览
 
 MiniMax 平台覆盖语言模型、语音合成、声音克隆、图像 / 视频 / 音乐生成、文件管理等能力。对语言模型同时提供 **Anthropic 兼容** 与 **OpenAI 兼容** 两套 HTTP API；其他模态走 MiniMax 自家协议（POST JSON + Bearer Token）。
@@ -31,7 +33,9 @@ MiniMax 平台覆盖语言模型、语音合成、声音克隆、图像 / 视频
 - `voice.md` — 音色复刻 / 设计 / 管理 5 个端点
 - `video.md` — 视频生成（t2v / i2v / fl2v / s2v）+ 任务查询 + 下载 + Agent
 - `image.md` — 文生图 + 图生图（共用 `/v1/image_generation`）
-- `music.md` — 音乐生成 + 翻唱前处理 + 歌词生成
+- `music.md` — 音乐生成
+- `lyrics.md` — 歌词生成 + 翻唱前处理（与 music 共用）
+- `caching.md` — Prompt 缓存（被动 + Anthropic 主动 cache_control）
 - `files.md` — 文件上传 / 列表 / 检索 / 删除
 - `errors.md` — 错误码与排查
 - `pricing.md` — 全模型定价表（CNY）

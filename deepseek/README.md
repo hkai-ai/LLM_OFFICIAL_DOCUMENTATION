@@ -1,9 +1,11 @@
 ---
 source: https://api-docs.deepseek.com/zh-cn/
-fetched_at: 2026-05-19
+fetched_at: 2026-05-26
 api_version: N/A（OpenAPI 标注 1.0.0；OpenAI 兼容路径无版本前缀）
 last_updated: 2026-05-26
 ---
+
+> 2026-05-26 更新：补齐 Anthropic 兼容接口 anthropic-api.md 与综合 guides.md（思考 / 多轮 / JSON / 工具 / 前缀续写 / token 用量）。
 
 # DeepSeek API 概览
 
@@ -43,8 +45,11 @@ API Key 在 https://platform.deepseek.com/api_keys 创建。
 | --- | --- | --- | --- |
 | 对话补全 | POST | `/chat/completions` | [chat-completions.md](./chat-completions.md) |
 | FIM 补全（Beta） | POST | `/beta/completions` | [fim-completion.md](./fim-completion.md) |
+| Anthropic 兼容 Messages | POST | `/anthropic/v1/messages` | [anthropic-api.md](./anthropic-api.md) |
 | 模型列表 | GET | `/models` | [models.md](./models.md) |
 | 账户余额 | GET | `/user/balance` | [user-balance.md](./user-balance.md) |
+
+使用指南（思考 / 多轮 / JSON / 工具 / 前缀续写 / token 用量）见 [guides.md](./guides.md)。
 
 辅助主题：
 

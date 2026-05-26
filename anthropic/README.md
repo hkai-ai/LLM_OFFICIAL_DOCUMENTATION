@@ -5,6 +5,8 @@ api_version: 2023-06-01（最新 anthropic-version）
 last_updated: 2026-05-26
 ---
 
+> 2026-05-26 更新：补齐 Message Batches / Files / Skills / Managed Agents / Rate Limits / Service Tiers 六篇端点文档。
+
 # Anthropic Claude API
 
 > 官方文档现位于 `https://platform.claude.com/docs/en/api/`。旧域名 `https://docs.anthropic.com/en/api/` 已 301 永久重定向至上述新域名。
@@ -68,21 +70,17 @@ SDK 自动注入 `x-api-key`、`anthropic-version`、`content-type` 三个 heade
 | Messages | `POST` | `/v1/messages` | [messages.md](./messages.md) |
 | Messages 流式 | `POST` | `/v1/messages`（`stream: true`） | [messages-streaming.md](./messages-streaming.md) |
 | Token 计数 | `POST` | `/v1/messages/count_tokens` | [count-tokens.md](./count-tokens.md) |
+| Message Batches（GA） | `POST` / `GET` / `POST :cancel` / `GET :results` | `/v1/messages/batches[...]` | [messages-batches.md](./messages-batches.md) |
+| Files（Beta） | `POST` / `GET` / `DELETE` | `/v1/files[...]` | [files.md](./files.md) |
+| Skills（Beta） | `POST` / `GET` / `DELETE` | `/v1/skills[...]` | [skills.md](./skills.md) |
+| Managed Agents（Beta） | `POST` / `GET` / `POST :archive` / `DELETE` | `/v1/agents`、`/v1/environments`、`/v1/sessions[...]` | [managed-agents.md](./managed-agents.md) |
 | Models 列表 | `GET` | `/v1/models` | [models.md](./models.md) |
 | Models 详情 | `GET` | `/v1/models/{model_id}` | [models.md](./models.md) |
 | 错误 | — | — | [errors.md](./errors.md) |
+| 限流 | — | — | [rate-limits.md](./rate-limits.md) |
+| Service Tiers | — | — | [service-tiers.md](./service-tiers.md) |
+| 定价 | — | — | [pricing.md](./pricing.md) |
 | 版本 / beta | — | — | [versioning.md](./versioning.md) |
-
-仓库中暂未单独整理但官方提供的端点（GA / Beta）：
-
-| 端点 | 状态 | 官方 URL |
-| --- | --- | --- |
-| `POST /v1/messages/batches` | GA | `https://platform.claude.com/docs/en/api/creating-message-batches` |
-| `POST /v1/files` / `GET /v1/files` | Beta | `https://platform.claude.com/docs/en/api/files-create` |
-| `POST /v1/skills` / `GET /v1/skills` | Beta | `https://platform.claude.com/docs/en/api/skills/create-skill` |
-| `POST /v1/agents` / `GET /v1/agents` | Beta（Managed Agents） | `https://platform.claude.com/docs/en/managed-agents/agent-setup` |
-| `POST /v1/sessions` / `GET /v1/sessions/{id}/stream` | Beta（Managed Agents） | `https://platform.claude.com/docs/en/managed-agents/sessions` |
-| `POST /v1/environments` / `GET /v1/environments` | Beta（Managed Agents） | `https://platform.claude.com/docs/en/managed-agents/environments` |
 
 ## 官方文档顶级目录
 
