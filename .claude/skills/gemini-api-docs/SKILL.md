@@ -56,7 +56,8 @@ description: 需要查阅、更新或扩充 Google Gemini Developer API（genera
 
 ## 3.1 定价文档维护（`google-gemini/pricing.md`）
 
-- **唯一权威源**：`https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn`（中文，可去掉 `?hl=zh-cn` 取英文）。
+- **权威源**：`https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn`（中文，可去掉 `?hl=zh-cn` 取英文）。
+- **抓取捷径（强烈推荐优先用）**：路径末尾加 `.md.txt`，即 `https://ai.google.dev/gemini-api/docs/pricing.md.txt?hl=zh-cn`，直接返回 Google 维护的 markdown 源文本，无 HTML 包装、无 CSR 渲染问题，比 HTML 页稳得多。WebFetch 拉不动时优先换这个。其他 docs 页（models、thinking、structured-output 等）是否同样支持 `.md.txt` 需要逐一验证，pricing 页已确认可用。
 - **同步触发**：新模型代次上线（如 Gemini 3.x 系列已上线）、`gemini-2.0-flash` 弃用日（**2026-06-01**）、Imagen / Veo / Lyria 子型号增减、Grounding 免费配额变动（当前每月 5,000 prompt）、Batch 折扣比例调整、`gemini-2.5-pro` ≤200k vs >200k 阈值变化、上下文缓存价（按 token·小时存储 + 按 token 读取）调整。
 - **抓取要点**：
   - 单页内容非常多，**分小节抓**：第一次 prompt 要文本模型，第二次要图像 / 视频，第三次要 TTS / Live API / Embedding / Tools。
@@ -111,8 +112,10 @@ description: 需要查阅、更新或扩充 Google Gemini Developer API（genera
 | Tuning | <https://ai.google.dev/api/tuning?hl=zh-CN> |
 | 错误故障排查 | <https://ai.google.dev/gemini-api/docs/troubleshooting?hl=zh-CN> |
 | 模型对比 | <https://ai.google.dev/gemini-api/docs/models> |
-| Pricing（中文） | <https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn> → 对应 `google-gemini/pricing.md` |
-| Pricing（英文） | <https://ai.google.dev/gemini-api/docs/pricing> |
+| Pricing（中文 HTML） | <https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn> → 对应 `google-gemini/pricing.md` |
+| Pricing（中文 markdown 源） | <https://ai.google.dev/gemini-api/docs/pricing.md.txt?hl=zh-cn> ← **抓取首选**，是 HTML 页背后的 markdown 源 |
+| Pricing（英文 HTML） | <https://ai.google.dev/gemini-api/docs/pricing> |
+| Pricing（英文 markdown 源） | <https://ai.google.dev/gemini-api/docs/pricing.md.txt> |
 | Thinking | <https://ai.google.dev/gemini-api/docs/thinking> |
 | 结构化输出 | <https://ai.google.dev/gemini-api/docs/structured-output> |
 | 安全设置 | <https://ai.google.dev/gemini-api/docs/safety-settings> |

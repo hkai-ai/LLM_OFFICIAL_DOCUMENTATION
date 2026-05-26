@@ -14,9 +14,24 @@ api_version: v1beta
 
 ## 1. 文本模型
 
+### `gemini-3-flash-preview`
+
+> 与 `gemini-3.5-flash` 定位描述一致（"most intelligent model built for speed..."），大概率是 3.5-flash 转正前的 preview 版。preview 期价格约为稳定版的 1/3。
+
+| 项 | Standard | Batch | Flex | Priority |
+| --- | --- | --- | --- | --- |
+| Input（text / image / video） | $0.50 / 1M | $0.25 / 1M | $0.25 / 1M | $0.90 / 1M |
+| Input（audio） | $1.00 / 1M | $0.50 / 1M | $0.50 / 1M | $1.80 / 1M |
+| Output（含 thinking） | $3.00 / 1M | $1.50 / 1M | $1.50 / 1M | $5.40 / 1M |
+| Context caching（text / image / video） | $0.05 / 1M | $0.05 / 1M（页面注「Batch 价未实现，同 Standard」） | $0.05 / 1M | $0.09 / 1M |
+| Context caching（audio） | $0.10 / 1M | $0.10 / 1M | $0.10 / 1M | $0.18 / 1M |
+| Context caching storage | $1.00 / 1M tokens · 小时 | $1.00 | $1.00 | $1.80 |
+
+免费层：Standard / Priority 的 input / output / cache 标 Free of charge；Batch / Flex 在免费层不可用。Search Grounding / Maps Grounding：5,000 prompts/月免费（Gemini 3 系列共享），之后 $14 / 1,000 次查询。
+
 ### `gemini-3-pro`
 
-> 文档抓取时该 ID 在主清单中存在但定价细节未列于 pricing 页主表，需重抓 https://ai.google.dev/gemini-api/docs/pricing 核对。
+> 文档抓取时该 ID 在主清单中存在但定价细节未列于 pricing 页主表，需重抓 https://ai.google.dev/gemini-api/docs/pricing 核对。**注**：2026-05-26 重新核对时，pricing 页主表已不再列出 `gemini-3-pro` 独立条目，文本/思考模型仅有 `gemini-3.1-pro-preview`（区分 ≤200k / >200k 输入档）；该 ID 可能已合并入 3.1 Pro Preview 或仅在 models 清单中存在。
 
 ### `gemini-3.5-flash`
 
