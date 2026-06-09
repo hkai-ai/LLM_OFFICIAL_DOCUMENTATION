@@ -1,11 +1,11 @@
 ---
 source: https://ai.google.dev/api?hl=zh-CN
-fetched_at: 2026-05-26
+fetched_at: 2026-06-09
 api_version: v1beta (兼有 v1)
-last_updated: 2026-05-26
+last_updated: 2026-06-09
 ---
 
-> 2026-05-26 更新：补齐 Batch Mode、Live API、File Search、Tuning 四篇端点文档。
+> 2026-06-09 更新：补齐 Batch Mode、Live API、File Search、Tuning 四篇端点文档。
 
 # Google Gemini Developer API · 厂商概览
 

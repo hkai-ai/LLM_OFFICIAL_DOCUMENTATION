@@ -1,6 +1,6 @@
 ---
 source: https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn
-fetched_at: 2026-05-26
+fetched_at: 2026-06-09
 api_version: v1beta
 ---
 
@@ -29,26 +29,52 @@ api_version: v1beta
 
 免费层：Standard / Priority 的 input / output / cache 标 Free of charge；Batch / Flex 在免费层不可用。Search Grounding / Maps Grounding：5,000 prompts/月免费（Gemini 3 系列共享），之后 $14 / 1,000 次查询。
 
-### `gemini-3-pro`
+### `gemini-3.1-pro-preview`
 
-> 文档抓取时该 ID 在主清单中存在但定价细节未列于 pricing 页主表，需重抓 https://ai.google.dev/gemini-api/docs/pricing 核对。**注**：2026-05-26 重新核对时，pricing 页主表已不再列出 `gemini-3-pro` 独立条目，文本/思考模型仅有 `gemini-3.1-pro-preview`（区分 ≤200k / >200k 输入档）；该 ID 可能已合并入 3.1 Pro Preview 或仅在 models 清单中存在。
+> 文本 / 思考旗舰，区分 ≤200k vs >200k 输入档位。（pricing 页主表已不再单列 `gemini-3-pro`，该 ID 可能已合并入 3.1 Pro Preview 或仅在 models 清单中存在。）单位均为 / 1M tokens。
+
+| 项 | ≤200k 输入 | >200k 输入 |
+| --- | --- | --- |
+| Input（Standard） | $2.00 | $4.00 |
+| Input（Batch / Flex，50% off） | $1.00 | $2.00 |
+| Input（Priority） | $3.60 | $7.20 |
+| Output（Standard，含 thinking） | $12.00 | $18.00 |
+| Output（Batch / Flex） | $6.00 | $9.00 |
+| Output（Priority） | $21.60 | $32.40 |
+| 上下文缓存读取（Standard / Batch / Flex） | $0.20 | $0.40 |
+| 上下文缓存读取（Priority） | $0.36 | $0.72 |
+| 上下文缓存存储（Standard / Batch / Flex） | $4.50 / 1M tokens · 小时 | 同左 |
+| 上下文缓存存储（Priority） | $8.10 / 1M tokens · 小时 | 同左 |
+
+免费层不可用（preview 旗舰仅付费层）。Search / Maps Grounding：5,000 prompts/月免费（Gemini 3 系列共享），之后 $14 / 1,000 次查询。
 
 ### `gemini-3.5-flash`
 
-| 项 | 免费层 | 付费标准 | Batch（50% off） |
-| --- | --- | --- | --- |
-| Input | $0 | $1.50 / 1M tokens | $0.75 / 1M tokens |
-| Output | $0 | $9.00 / 1M tokens | $4.50 / 1M tokens |
-| 上下文缓存读取 | — | $0.15 / 1M tokens | — |
-| 上下文缓存存储 | — | $1.00 / 1M tokens · 小时 | — |
+> 单位均为 / 1M tokens。
+
+| 项 | Standard | Batch | Flex | Priority |
+| --- | --- | --- | --- | --- |
+| Input | $1.50 | $0.75 | $0.75 | $2.70 |
+| Output | $9.00 | $4.50 | $4.50 | $16.20 |
+| 上下文缓存读取 | $0.15 | $0.075 | $0.075 | $0.27 |
+| 上下文缓存存储（/ 1M · 小时） | $1.00 | $0.50 | $0.50 | $1.80 |
+
+免费层：Standard 的 input / output 标 Free of charge；Batch / Flex 在免费层不可用。Search / Maps Grounding：5,000 prompts/月免费（Gemini 3 系列共享），之后 $14 / 1,000 次查询。
 
 ### `gemini-3.1-flash-lite`
 
-| 项 | 免费层 | 付费标准 | Batch（50% off） |
-| --- | --- | --- | --- |
-| Input（text / image / video） | $0 | $0.25 / 1M tokens | $0.125 / 1M tokens |
-| Input（audio） | $0 | $0.50 / 1M tokens | — |
-| Output | $0 | $1.50 / 1M tokens | $0.75 / 1M tokens |
+> 单位均为 / 1M tokens。
+
+| 项 | Standard | Batch | Flex | Priority |
+| --- | --- | --- | --- | --- |
+| Input（text / image / video） | $0.25 | $0.125 | $0.125 | $0.45 |
+| Input（audio） | $0.50 | $0.25 | $0.25 | $0.90 |
+| Output | $1.50 | $0.75 | $0.75 | $2.70 |
+| 上下文缓存（text / image / video） | $0.025 | $0.0125 | $0.0125 | $0.045 |
+| 上下文缓存（audio） | $0.05 | $0.025 | $0.025 | $0.09 |
+| 上下文缓存存储（/ 1M · 小时） | $1.00 | $0.50 | $0.50 | $1.80 |
+
+免费层：Standard 的 input / output 标 Free of charge。
 
 ### `gemini-2.5-pro`
 
@@ -75,15 +101,59 @@ api_version: v1beta
 | Input（audio） | $0 | $0.30 / 1M tokens | — |
 | Output | $0 | $0.40 / 1M tokens | $0.20 / 1M tokens |
 
+### `gemini-2.5-flash-lite-preview-09-2025`
+
+> 2.5-flash-lite 的 09-2025 预览快照，价格与稳定版 `gemini-2.5-flash-lite` 一致。
+
+| 项 | 免费层 | 付费标准 | Batch |
+| --- | --- | --- | --- |
+| Input（text / image / video） | $0 | $0.10 / 1M tokens | $0.05 / 1M tokens |
+| Input（audio） | $0 | $0.30 / 1M tokens | $0.15 / 1M tokens |
+| Output | $0 | $0.40 / 1M tokens | $0.20 / 1M tokens |
+
+### `gemini-2.5-computer-use-preview-10-2025`
+
+> Computer Use（屏幕操作）专用预览，价格与 `gemini-2.5-pro` 同档，区分 ≤200k / >200k 输入。
+
+| 项 | 付费标准（≤200k 输入） | 付费标准（>200k 输入） |
+| --- | --- | --- |
+| Input | $1.25 / 1M tokens | $2.50 / 1M tokens |
+| Output | $10.00 / 1M tokens | $15.00 / 1M tokens |
+
 ### `gemini-2.0-flash`
 
-> **已弃用**，**2026-06-01** 停止服务。
+> **已弃用**，**2026-06-01** 停止服务（当前日期已过该节点）。
 
-| 项 | 付费标准 |
-| --- | --- |
-| Input（text / image / video） | $0.10 / 1M tokens |
-| Input（audio） | $0.70 / 1M tokens |
-| Output | $0.40 / 1M tokens |
+| 项 | 付费标准 | Batch |
+| --- | --- | --- |
+| Input（text / image / video） | $0.10 / 1M tokens | $0.05 / 1M tokens |
+| Input（audio） | $0.70 / 1M tokens | $0.35 / 1M tokens |
+| Output | $0.40 / 1M tokens | $0.20 / 1M tokens |
+
+### `gemini-2.0-flash-lite`
+
+> **已弃用**，**2026-06-01** 停止服务（当前日期已过该节点）。
+
+| 项 | 付费标准 | Batch |
+| --- | --- | --- |
+| Input | $0.075 / 1M tokens | $0.0375 / 1M tokens |
+| Output | $0.30 / 1M tokens | $0.15 / 1M tokens |
+
+### `gemini-robotics-er-1.6-preview`
+
+> Robotics 具身推理（Embodied Reasoning）预览模型。单位均为 / 1M tokens。
+
+| 项 | Standard | Batch |
+| --- | --- | --- |
+| Input（text / image / video） | $1.00 | $0.50 |
+| Input（audio） | $2.00 | $1.00 |
+| Output | $5.00 | $2.50 |
+
+Search / Maps Grounding：5,000 prompts/月免费，之后 $14 / 1,000 次查询。
+
+### `gemma-4`
+
+> 开源权重 Gemma，仅免费层提供，input / output 均 Free of charge。
 
 ## 2. 图像生成
 
@@ -183,10 +253,19 @@ api_version: v1beta
 
 ## 6. 工具与接地
 
-| 工具 | 价格 |
+> **重要：Grounding 免费配额与单价按模型代次不同，切勿混用。**
+> - **Gemini 3 系列**（含 3.1 Pro Preview / 3.5 Flash / 3 Flash Preview / Robotics 等）：每月前 5,000 个 prompt 免费，之后 $14 / 1,000 次查询。
+> - **Gemini 2.x 系列**：按每日请求数（RPD）给免费配额，超出后单价为 Search $35 / Maps $25 每 1,000 prompts，**没有「5,000/月免费」这一说**。
+
+| 模型代次 | Search Grounding | Maps Grounding |
+| --- | --- | --- |
+| Gemini 3 系列 | 5,000 prompts/月免费；之后 $14 / 1,000 次查询 | 5,000 prompts/月免费；之后 $14 / 1,000 次查询 |
+| `gemini-2.5-pro` | 1,500 RPD 免费；之后 $35 / 1,000 prompts | —（按 Search 同价） |
+| `gemini-2.5-flash` / `flash-lite` | 免费层 500 RPD（付费层 1,500 RPD）免费；之后 $35 / 1,000 | $25 / 1,000 prompts |
+| `gemini-2.0-flash` | 500 RPD 免费；之后 $35 / 1,000 | $25 / 1,000 prompts |
+
+| 其他工具 | 价格 |
 | --- | --- |
-| Google Search Grounding（Gemini 3 系列） | 每月前 5,000 个 prompt 免费；之后 $14 / 1,000 次查询 |
-| Google Maps Grounding | 每月前 5,000 个 prompt 免费；之后 $14 / 1,000 次查询 |
 | Code Execution | 按对应模型 token 价计费，无附加费 |
 | URL Context | 按对应模型 Input token 价计费 |
 | File Search 嵌入 | $0.15 / 1M tokens；检索文档按对应模型标准 token 价计费 |
