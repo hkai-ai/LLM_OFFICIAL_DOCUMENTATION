@@ -2,9 +2,11 @@
 source: https://help.aliyun.com/zh/model-studio/model-api-reference/
 fetched_at: 2026-05-26
 api_version: N/A（DashScope 路径含 `/api/v1`；OpenAI 兼容模式仅用 `/compatible-mode/v1` 前缀）
-last_updated: 2026-05-26
+last_updated: 2026-11-09
 ---
 
+> 2026-11-09 更新：新增 Anthropic 兼容 Messages（Claude Code 代理）端点文档；修正此前 `/anthropic` 的错误描述，真实 Base URL 为 `/api/v2/apps/claude-code-proxy`。
+>
 > 2026-05-26 更新：补齐 OpenAI 兼容 + DashScope 双协议 embeddings.md、Batch 异步批量 batch.md。
 
 # 阿里百炼 Model Studio API 概览
@@ -13,10 +15,10 @@ last_updated: 2026-05-26
 
 1. **OpenAI 兼容 - Chat Completions**（推荐迁移现有 OpenAI 代码）
 2. **OpenAI 兼容 - Responses**（带内置 web_search / code_interpreter / web_extract 与会话续接）
-3. **Anthropic 兼容 - Messages**（兼容 Anthropic SDK，支持 thinking / tools）
+3. **Anthropic 兼容 - Messages**（兼容 Anthropic SDK，支持 thinking / tools；见 [anthropic-messages.md](./anthropic-messages.md)）
 4. **DashScope 原生 generation**（功能最全，参数最完整，含多模态、视频、3D、向量等所有能力）
 
-百炼托管自家通义千问（Qwen）系列，也聚合第三方模型（DeepSeek、Kimi、GLM、MiniMax 等）。本仓库以**OpenAI 兼容模式**与 **DashScope 原生模式**两条线为主。
+百炼托管自家通义千问（Qwen）系列，也聚合第三方模型（DeepSeek、Kimi、GLM、MiniMax 等）。本仓库覆盖 OpenAI 兼容、Anthropic 兼容与 DashScope 原生三条协议线。
 
 ## Base URL（按地域）
 
@@ -29,6 +31,19 @@ last_updated: 2026-05-26
 | Batch 专用 | `https://batch.dashscope.aliyuncs.com/compatible-mode/v1` | — |
 
 > **不同地域 API Key 不互通**；切换地域必须同时切换 API Key 与 base URL。
+
+### Anthropic 兼容（Claude Code 代理）
+
+| 地域 | Base URL |
+| --- | --- |
+| 华北 2（北京） | `https://dashscope.aliyuncs.com/api/v2/apps/claude-code-proxy` |
+| 新加坡 | `https://dashscope-intl.aliyuncs.com/api/v2/apps/claude-code-proxy` |
+| 美西（弗吉尼亚） | `https://dashscope-us.aliyuncs.com/api/v2/apps/claude-code-proxy` |
+| 德国（法兰克福） | 文档未说明 |
+
+Anthropic SDK 会在 Base URL 后追加 `/v1/messages`。鉴权使用 `Authorization: Bearer ${DASHSCOPE_API_KEY}`，不支持 `x-api-key`，也不需要 `anthropic-version`。详见 [anthropic-messages.md](./anthropic-messages.md)。
+
+> `/anthropic` 不是该代理的 Base URL（实测返回 `404`）；`coding.dashscope.aliyuncs.com` 也不提供该代理。
 
 ## 鉴权
 
@@ -53,6 +68,12 @@ API Key 在 https://bailian.console.aliyun.com/?tab=model#/api-key 创建，按�
 | Embeddings | POST | `/compatible-mode/v1/embeddings` | [embeddings.md](./embeddings.md) |
 | Batch Chat | POST | `/compatible-mode/v1/batches` | [batch.md](./batch.md) |
 | Models | GET | `/compatible-mode/v1/models` | [models.md](./models.md) |
+
+### Anthropic 兼容模式
+
+| 端点 | 方法 | 路径 | 说明 |
+| --- | --- | --- | --- |
+| Messages | POST | `/v1/messages` | Base URL 见上；[anthropic-messages.md](./anthropic-messages.md) |
 
 ### DashScope 原生
 
@@ -79,6 +100,13 @@ API Key 在 https://bailian.console.aliyun.com/?tab=model#/api-key 创建，按�
 - 百炼特有字段（`enable_thinking` / `thinking_budget` / `enable_search` / `search_options` / `translation_options` / `cache_control` 等）通过 SDK 的 `extra_body` 透传。
 - 思考模式开启时，模型在 `choices[].message.reasoning_content` 输出思维链（与 DeepSeek、Moonshot 同名）。
 - Qwen3 商业版（思考模式）、Qwen3 开源版、QwQ、QVQ 等**仅支持流式**返回，必须 `stream: true`。
+
+## 与 Anthropic SDK 的兼容性
+
+- Base URL：`https://dashscope.aliyuncs.com/api/v2/apps/claude-code-proxy`（地域变体见上）。
+- Claude Code 使用 `ANTHROPIC_BASE_URL` 指向该地址，`ANTHROPIC_AUTH_TOKEN` 提供 Bearer Key。
+- 鉴权不接受 `x-api-key`，也不需要 `anthropic-version`。
+- 完整请求示例与验证记录见 [anthropic-messages.md](./anthropic-messages.md)。
 
 ## 模型清单速查
 

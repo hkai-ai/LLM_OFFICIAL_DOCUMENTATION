@@ -19,7 +19,7 @@ description: 当需要查阅、更新或扩充阿里云大模型服务平台百�
 - 百炼提供 **4 套并列协议**，文档对每一套都单独建页：
   - OpenAI 兼容 Chat Completions：`/qwen-api-via-openai-chat-completions`
   - OpenAI 兼容 Responses：`/compatibility-with-openai-responses-api`、`/qwen-api-via-openai-responses`（同一主题不同 slug，内容互补）
-  - Anthropic 兼容 Messages：（位于 API 参考 - 对话子树）
+  - Anthropic 兼容 Messages：Base URL 为 `/api/v2/apps/claude-code-proxy`（地域变体见 `alibaba-bailian/README.md`；官方页位于 API 参考 - 对话子树）
   - DashScope 原生 generation：`/qwen-api-via-dashscope`
 - 公开访问，无需登录；个别页面包含 SDK 代码块（Python / Java / Go / Node），但参数说明全部 SSR。
 
@@ -36,6 +36,7 @@ description: 当需要查阅、更新或扩充阿里云大模型服务平台百�
 
 1. **抓 `/qwen-api-reference/`**：核对左侧导航是否新增模态 / 协议子树。
 2. **抓 4 套协议主页**：`qwen-api-via-openai-chat-completions` / `compatibility-with-openai-responses-api` / `qwen-api-via-openai-responses` / `qwen-api-via-dashscope`，diff 请求 / 响应字段表，同步 `alibaba-bailian/chat-completions.md`、`alibaba-bailian/responses.md`、`alibaba-bailian/dashscope-generation.md`。
+   同时核对 Anthropic 兼容 Messages 的 Base URL 是否为 `/api/v2/apps/claude-code-proxy`，同步 `alibaba-bailian/anthropic-messages.md`。
 3. **抓 `/error-code`**：核对错误码清单与排查段落，同步 `alibaba-bailian/errors.md`。
 4. **抓 `/get-api-key` 与 `/first-api-call-to-qwen`**：核对各地域 base URL 是否新增 / 调整，更新 README 表格。
 5. **抓 `/models` 与单个模型详情页**：仅同步官方明示数据（上下文窗口 / 价格 / 思考支持），未明示者保留「文档未说明」。
@@ -56,7 +57,7 @@ description: 当需要查阅、更新或扩充阿里云大模型服务平台百�
 - **Responses API 的 `previous_response_id`**：有效期 7 天，过期后必须重新提供完整 messages。
 - **会话缓存 vs 显式缓存**：Responses 用 header `x-dashscope-session-cache: enable` 实现会话缓存；Chat Completions 用 `cache_control` 字段实现显式 prompt 缓存，二者不同机制不同字段。
 - **`cache_control` 命中字段**：成功命中后 `usage.prompt_tokens_details.cached_tokens > 0`；首次写入显示 `usage.cache_creation.ephemeral_5m_input_tokens`。
-- **Anthropic 兼容模式**：百炼也提供 `/anthropic` 前缀的 Messages 兼容（与 DeepSeek 类似），但本仓库未单独整理；如用户问到需在 SKILL 中提醒「百炼也支持 Anthropic SDK 调用」。
+- **Anthropic 兼容模式**：Base URL 是 `/api/v2/apps/claude-code-proxy`（不是 `/anthropic`，后者实测 404）。Anthropic SDK 自动追加 `/v1/messages`；鉴权用 `Authorization: Bearer ${DASHSCOPE_API_KEY}`，不支持 `x-api-key`，也不需要 `anthropic-version`。详见 `alibaba-bailian/anthropic-messages.md`。
 - **聚合的第三方模型**：通过百炼调用 `kimi-k2.6` / `deepseek-v4-pro` 等仍走百炼协议字段，不要套用原厂特有字段（例如 DeepSeek 的 `prefix: true` 在百炼侧未必兼容）。
 - **官方页 typo**：「应用」拼写为 `applicantion-api-reference` 是阿里云原拼，不是抓取错误。
 
@@ -74,6 +75,7 @@ description: 当需要查阅、更新或扩充阿里云大模型服务平台百�
 | OpenAI 兼容 Batch Chat | https://help.aliyun.com/zh/model-studio/openai-compatible-batch-chat | （未单独整理） |
 | OpenAI 兼容 Embedding | https://help.aliyun.com/zh/model-studio/embedding-interfaces-compatible-with-openai | （未单独整理） |
 | OpenAI 兼容 VL | https://help.aliyun.com/zh/model-studio/qwen-vl-compatible-with-openai | （未单独整理） |
+| Anthropic 兼容 Messages | https://help.aliyun.com/zh/model-studio/model-api-reference/ | `alibaba-bailian/anthropic-messages.md` |
 | DashScope 原生 | https://help.aliyun.com/zh/model-studio/qwen-api-via-dashscope | `alibaba-bailian/dashscope-generation.md` |
 | 文本生成总览 | https://help.aliyun.com/zh/model-studio/text-generation | `alibaba-bailian/README.md` |
 | 多轮对话 | https://help.aliyun.com/zh/model-studio/multi-round-conversation | `alibaba-bailian/chat-completions.md` |
