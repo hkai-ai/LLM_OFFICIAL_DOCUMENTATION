@@ -177,7 +177,7 @@ LLM_OFFICIAL_DOCUMENTATION/
 
 | 维度 | Anthropic | OpenAI | Google Gemini | DeepSeek | Moonshot Kimi | 阿里百炼 | OpenRouter | 火山方舟 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Base URL | `api.anthropic.com` | `api.openai.com/v1` | `generativelanguage.googleapis.com/v1beta` | `api.deepseek.com` | `api.moonshot.cn/v1` | `dashscope.aliyuncs.com/compatible-mode/v1` 或 `/api/v1` | `openrouter.ai/api/v1` | `ark.cn-beijing.volces.com/api/v3` |
+| Base URL | `api.anthropic.com` | `api.openai.com/v1` | `generativelanguage.googleapis.com/v1beta` | `api.deepseek.com` | `api.moonshot.cn/v1` | `dashscope.aliyuncs.com/compatible-mode/v1`、`/api/v1` 或 `/api/v2/apps/claude-code-proxy`（Anthropic） | `openrouter.ai/api/v1` | `ark.cn-beijing.volces.com/api/v3` |
 | 鉴权 header | `x-api-key` + `anthropic-version` | `Authorization: Bearer` | `x-goog-api-key` 或 `?key=` | `Authorization: Bearer` | `Authorization: Bearer` | `Authorization: Bearer` (+ DashScope SSE 需 `X-DashScope-SSE`) | `Authorization: Bearer` (+ `HTTP-Referer` / `X-Title` 可选) | `Authorization: Bearer`（API Key）或 AK/SK 签名 |
 | 协议风格 | 私有（Messages） | 私有（Chat/Responses） | 私有（generateContent） | OpenAI 兼容 | OpenAI 兼容 | 4 套：OpenAI 兼容 Chat/Responses + Anthropic 兼容 + DashScope 原生 | OpenAI 兼容（路由聚合） | OpenAI 兼容 Chat + 私有 Responses |
 | 推理 / 思考 | `thinking` 块 + `thinking.budget_tokens` | `reasoning_effort` / `reasoning.effort` | `thinkingConfig.thinkingBudget` | `thinking.type` / `reasoning_content` | `thinking.type` + `thinking.keep`（K2.6） | `enable_thinking` + `thinking_budget` / `reasoning.effort`（Responses） | `reasoning`（透传上游字段） | `thinking.type`（enabled/disabled/auto）+ `reasoning_effort` |
